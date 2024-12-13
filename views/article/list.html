@@ -1,0 +1,24 @@
+<h1>Article List</h1>
+<a href="/articles/create">Create User</a>
+<table border="1">
+	<tr>
+		<th>ID</th>
+		<th>Title</th>
+		<th>Description</th>
+	</tr>
+	{{range .Articles}}
+	<tr>
+		<td>{{.Id}}</td>
+		<td>
+			<a href="/articles/{{.Id}}">
+				{{.Title}}
+			</a>
+		</td>
+		<td>{{.Description}}</td>
+		<td>
+			<a href="/articles/edit/{{.Id}}">Edit</a>
+			<a href="/articles/delete/{{.Id}}">Delete</a>
+		</td>
+	</tr>
+	{{end}}
+</table>
