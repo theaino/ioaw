@@ -33,19 +33,19 @@ func (c *ArticleController) View() {
 
 func (c *ArticleController) CreateForm() {
 	if c.NeedLogin() { return }
+
+	c.Data["Form"] = &models.Article{}
 	c.TplName = "article/new.html"
 }
 
 func (c *ArticleController) Create() {
 	if c.NeedLogin() { return }
 
-	title := c.GetString("title")
-	description := c.GetString("description")
-	body := c.GetString("body")
-	article := models.Article{
-		Title: title,
-		Description: description,
-		Body: body,
+	var article models.Article
+	if c.ParseForm(&article) != nil {
+		c.Data["Error"] = "Failed to create article."
+		c.TplName = "article/create.html"
+		return
 	}
 	o := orm.NewOrm()
 	_, err := o.Insert(&article)
@@ -58,34 +58,39 @@ func (c *ArticleController) Create() {
 }
 
 func (c *ArticleController) EditForm() {
-    id, _ := c.GetInt(":id")
-    o := orm.NewOrm()
-    article := models.Article{Id: id}
-    err := o.Read(&article)
-    if err == nil {
-        c.Data["Article"] = article
-        c.TplName = "article/edit.html"
-    } else {
-        c.Redirect("/articles", 302)
-    }
+	if c.NeedLogin() { return }
+
+	id, _ := c.GetInt(":id")
+	o := orm.NewOrm()
+	article := models.Article{Id: id}
+	err := o.Read(&article)
+	if err == nil {
+		c.Data["Article"] = article
+		c.Data["Form"] = &article
+		c.TplName = "article/edit.html"
+	} else {
+		c.Redirect("/articles", 302)
+	}
 }
 
 func (c *ArticleController) Update() {
-    id, _ := c.GetInt(":id")
-    o := orm.NewOrm()
-    article := models.Article{Id: id}
-    if o.Read(&article) == nil {
-        article.Title = c.GetString("title")
-        article.Description = c.GetString("description")
-        article.Body = c.GetString("body")
-        o.Update(&article)
-    }
-    c.Redirect("/articles", 302)
+	if c.NeedLogin() { return }
+
+	id, _ := c.GetInt(":id")
+	o := orm.NewOrm()
+	article := models.Article{Id: id}
+	if o.Read(&article) == nil {
+		c.ParseForm(&article)
+		o.Update(&article)
+	}
+	c.Redirect("/articles", 302)
 }
 
 func (c *ArticleController) Delete() {
-    id, _ := c.GetInt(":id")
-    o := orm.NewOrm()
-    o.Delete(&models.Article{Id: id})
-    c.Redirect("/articles", 302)
+	if c.NeedLogin() { return }
+
+	id, _ := c.GetInt(":id")
+	o := orm.NewOrm()
+	o.Delete(&models.Article{Id: id})
+	c.Redirect("/articles", 302)
 }

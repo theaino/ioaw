@@ -5,10 +5,10 @@ import (
 )
 
 type Article struct {
-	Id       int
-	Title string
-	Description string
-	Body string
+	Id       int `form:"-"`
+	Title string `form:"title"`
+	Description string `form:"description"`
+	Body string `form:"body"`
 }
 
 func init() {

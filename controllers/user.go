@@ -58,7 +58,7 @@ func (c *UserController) Login() {
 
 	if err == nil && user.Password == hashedPassword {
 		c.SetSession("username", username)
-		c.Redirect("/dashboard", 302)
+		c.Redirect("/articles", 302)
 	} else {
 		c.Data["Error"] = "Invalid username or password"
 		c.TplName = "login.html"

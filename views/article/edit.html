@@ -1,8 +1,6 @@
 <h1>Edit User</h1>
 <form action="/articles/edit/{{.Article.Id}}" method="post">
-    <label>Title:</label><input type="text" name="title" value="{{.Article.Title}}"><br>
-    <label>Description:</label><input type="text" name="description" value="{{.Article.Description}}"><br>
-    <label>Body:</label><input type="text" name="body" value="{{.Article.Body}}"><br>
-    <button type="submit">Update</button>
+	{{.Form | renderform}}
+	<button type="submit">Update</button>
 </form>
 <a href="/articles">Back to List</a>
