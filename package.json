@@ -1,0 +1,20 @@
+{
+  "name": "ioaw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+		"build:css": "tailwindcss -i ./static/css/tailwind/style.css -o ./static/css/style.css",
+		"watch:css": "tailwindcss -i ./static/css/tailwind/style.css -o ./static/css/style.css --watch",
+		"serve": "bee run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.16"
+  }
+}
