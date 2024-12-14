@@ -2,6 +2,8 @@ package main
 
 import (
 	_ "ioaw/routers"
+	"os"
+	"strconv"
 
 	"github.com/beego/beego/v2/client/orm"
 	beego "github.com/beego/beego/v2/server/web"
@@ -9,6 +11,12 @@ import (
 )
 
 func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	beego.BConfig.Listen.HTTPPort, _ = strconv.Atoi(port)
+
 	orm.RegisterDriver("sqlite3", orm.DRSqlite)
 	orm.RegisterDataBase("default", "sqlite3", "data.db")
 

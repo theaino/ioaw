@@ -12,7 +12,9 @@ func init() {
 
 	web.Router("/articles", &controllers.ArticleController{}, "get:List")
 	web.Router("/articles/:id", &controllers.ArticleController{}, "get:View")
-	web.Router("/articles/create", &controllers.ArticleController{}, "get:CreateForm;post:Create")
-	web.Router("/articles/edit/:id", &controllers.ArticleController{}, "get:EditForm;post:Update")
+	web.Router("/articles/create", &controllers.ArticleController{}, "get:New;post:Create")
+	web.Router("/articles/edit/:id", &controllers.ArticleController{}, "get:Edit;post:Update")
 	web.Router("/articles/delete/:id", &controllers.ArticleController{}, "get:Delete")
+
+	web.Router("/", &controllers.DashboardController{}, "get:Index")
 }

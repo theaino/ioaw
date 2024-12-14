@@ -1,6 +1,5 @@
-<h1>Edit User</h1>
-<form action="/articles/edit/{{.Article.Id}}" method="post">
-	{{.Form | renderform}}
-	<button type="submit">Update</button>
+<h1>Edit article</h1>
+<form action="{{urlfor "ArticleController.Update" ":id" .Article.Id}}" method="post">
+	{{template "article/_form.html" .}}
 </form>
-<a href="/articles">Back to List</a>
+<a href="{{urlfor "ArticleController.List"}}">Back to List</a>

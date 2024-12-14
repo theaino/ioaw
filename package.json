@@ -6,15 +6,16 @@
     "test": "tests"
   },
   "scripts": {
-		"build:css": "tailwindcss -i ./static/css/tailwind/style.css -o ./static/css/style.css",
-		"watch:css": "tailwindcss -i ./static/css/tailwind/style.css -o ./static/css/style.css --watch",
-		"serve": "bee run"
+    "build:css": "sass --load-path=node_modules static/scss/style.scss static/css/style.css",
+    "serve": "bee run",
+    "heroku-postbuild": "npm run build:css"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "tailwindcss": "^3.4.16"
+  "dependencies": {
+    "bulma": "^1.0.2",
+    "sass": "^1.83.0"
   }
 }

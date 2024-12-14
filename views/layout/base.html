@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 	<head>
 		<meta charset="UTF-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Ideas on a walk</title>
-  	<link href="/static/css/style.css" rel="stylesheet">
+		{{assets_css "/static/css/style.css"}}
 	</head>
 	<body>
-		<header>
-			<h1 class="text-3xl font-bold underline">
-				Ideas on a walk
-			</h1>
-		</header>
+		{{template "layout/nav.html" .}}
 		<main>
 			{{.LayoutContent}}
 		</main>
 		<footer>
-			<p>&copy; 2024 Aino Spring</p>
+			{{template "layout/footer.html" .}}
 		</footer>
 	</body>
 </html>

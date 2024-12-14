@@ -1,5 +1,5 @@
 <h1>Article List</h1>
-<a href="/articles/create">Create User</a>
+<a href="{{urlfor "ArticleController.New"}}">Create article</a>
 <table class="table-auto">
 	<thead>
 		<tr>
@@ -13,14 +13,14 @@
 		<tr>
 			<td>{{.Id}}</td>
 			<td>
-				<a href="/articles/{{.Id}}">
+				<a href="{{urlfor "ArticleController.View" ":id" .Id}}">
 					{{.Title}}
 				</a>
 			</td>
 			<td>{{.Description}}</td>
 			<td>
-				<a href="/articles/edit/{{.Id}}">Edit</a>
-				<a href="/articles/delete/{{.Id}}">Delete</a>
+				<a href="{{urlfor "ArticleController.Edit" ":id" .Id}}">Edit</a>
+				<a href="{{urlfor "ArticleController.Delete" ":id" .Id}}">Delete</a>
 			</td>
 		</tr>
 		{{end}}

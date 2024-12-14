@@ -13,7 +13,7 @@ type UserController struct {
 }
 
 func (c *UserController) RegisterForm() {
-	c.TplName = "register.html"
+	c.TplName = "user/register.html"
 }
 
 func (c *UserController) Register() {
@@ -33,7 +33,7 @@ func (c *UserController) Register() {
 	_, err := o.Insert(&user)
 	if err != nil {
 		c.Data["Error"] = "User already exists"
-		c.TplName = "register.html"
+		c.TplName = "user/register.html"
 		return
 	}
 
@@ -41,7 +41,7 @@ func (c *UserController) Register() {
 }
 
 func (c *UserController) LoginForm() {
-	c.TplName = "login.html"
+	c.TplName = "user/login.html"
 }
 
 func (c *UserController) Login() {
@@ -61,7 +61,7 @@ func (c *UserController) Login() {
 		c.Redirect("/articles", 302)
 	} else {
 		c.Data["Error"] = "Invalid username or password"
-		c.TplName = "login.html"
+		c.TplName = "user/login.html"
 	}
 }
 

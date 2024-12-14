@@ -31,7 +31,7 @@ func (c *ArticleController) View() {
 	}
 }
 
-func (c *ArticleController) CreateForm() {
+func (c *ArticleController) New() {
 	if c.NeedLogin() { return }
 
 	c.Data["Form"] = &models.Article{}
@@ -57,7 +57,7 @@ func (c *ArticleController) Create() {
 	}
 }
 
-func (c *ArticleController) EditForm() {
+func (c *ArticleController) Edit() {
 	if c.NeedLogin() { return }
 
 	id, _ := c.GetInt(":id")

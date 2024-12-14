@@ -1,9 +1,8 @@
-<h1>Create User</h1>
+<h1>Create article</h1>
 {{if .Error}}
 <p style="color: red;">{{.Error}}</p>
 {{end}}
 <form action="/articles/create" method="post">
-	{{.Form | renderform}}
-	<button type="submit">Create</button>
+	{{template "article/_form.html" .}}
 </form>
-<a href="/articles">Back to List</a>
+<a href="{{urlfor "ArticleController.List"}}">Back to List</a>

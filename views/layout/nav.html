@@ -1,0 +1,27 @@
+<nav class="navbar">
+	<div class="navbar-brand">
+		<a href="/" class="navbar-item">
+			Ideas on a walk
+		</a>
+
+		<div class="navbar-menu">
+			<div class="navbar-start">
+				<a href="{{urlfor "ArticleController.List"}}" class="navbar-item">
+					Articles
+				</a>
+			</div>
+
+			<div class="navbar-end">
+				{{if .Authed}}
+				<a href="{{urlfor "UserController.Logout"}}" class="navbar-item">
+					Logout
+				</a>
+				{{else}}
+				<a href="{{urlfor "UserController.Login"}}" class="navbar-item">
+					Login
+				</a>
+				{{end}}
+			</div>
+		</div>
+	</div>
+</nav>
