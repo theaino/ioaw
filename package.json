@@ -6,9 +6,12 @@
     "test": "tests"
   },
   "scripts": {
-    "build:css": "sass --load-path=node_modules static/scss/style.scss static/css/style.css",
     "serve": "bee run",
-    "heroku-postbuild": "npm run build:css"
+    "build": "webpack --mode=production --node-env=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "heroku-postbuild": "npm run build:prod"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +19,17 @@
   "description": "",
   "dependencies": {
     "bulma": "^1.0.2",
-    "sass": "^1.83.0"
+    "jquery": "^3.7.1",
+    "lucide": "^0.468.0"
+  },
+  "devDependencies": {
+    "@webpack-cli/generators": "^3.0.7",
+    "css-loader": "^7.1.2",
+    "prettier": "^3.3.3",
+    "sass": "^1.83.0",
+    "sass-loader": "^16.0.4",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4"
   }
 }

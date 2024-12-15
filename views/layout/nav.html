@@ -1,12 +1,19 @@
 <header>
-	<nav class="navbar">
+	<nav class="navbar" role="navigation">
 		<div class="navbar-brand">
 			<a class="navbar-item" href="{{urlfor "DashboardController.Index"}}">
 				Ioaw
 			</a>
+
+			<a role="button" class="navbar-burger has-text-inherit" data-target="navbar">
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			</a>
 		</div>
 
-		<div class="navbar-menu">
+		<div class="navbar-menu" id="navbar">
 			<div class="navbar-start">
 				<a class="navbar-item" href="{{urlfor "ArticleController.List"}}">
 					Articles
