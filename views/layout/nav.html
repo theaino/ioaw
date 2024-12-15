@@ -1,12 +1,14 @@
-<nav class="navbar">
-	<div class="navbar-brand">
-		<a href="/" class="navbar-item">
-			Ideas on a walk
-		</a>
+<header>
+	<nav class="navbar">
+		<div class="navbar-brand">
+			<a class="navbar-item" href="{{urlfor "DashboardController.Index"}}">
+				Ioaw
+			</a>
+		</div>
 
 		<div class="navbar-menu">
 			<div class="navbar-start">
-				<a href="{{urlfor "ArticleController.List"}}" class="navbar-item">
+				<a class="navbar-item" href="{{urlfor "ArticleController.List"}}">
 					Articles
 				</a>
 			</div>
@@ -23,5 +25,5 @@
 				{{end}}
 			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
+</header>

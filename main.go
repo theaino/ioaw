@@ -13,10 +13,9 @@ import (
 
 func main() {
 	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
+	if port != "" {
+		beego.BConfig.Listen.HTTPPort, _ = strconv.Atoi(port)
 	}
-	beego.BConfig.Listen.HTTPPort, _ = strconv.Atoi(port)
 
 	dbUrl := os.Getenv("DATABASE_URL")
 	if dbUrl == "" {

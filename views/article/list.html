@@ -1,28 +1,12 @@
-<h1>Article List</h1>
-<a href="{{urlfor "ArticleController.New"}}">Create article</a>
-<table class="table-auto">
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Title</th>
-			<th>Description</th>
-		</tr>
-	</thead>
-	<tbody>
-		{{range .Articles}}
-		<tr>
-			<td>{{.Id}}</td>
-			<td>
-				<a href="{{urlfor "ArticleController.View" ":id" .Id}}">
-					{{.Title}}
-				</a>
-			</td>
-			<td>{{.Description}}</td>
-			<td>
-				<a href="{{urlfor "ArticleController.Edit" ":id" .Id}}">Edit</a>
-				<a href="{{urlfor "ArticleController.Delete" ":id" .Id}}">Delete</a>
-			</td>
-		</tr>
-		{{end}}
-	</tbody>
-</table>
+<h1 class="title">
+	Articles
+	{{if .Authed}}
+	<a class="has-text-inherit" href="{{urlfor "ArticleController.New"}}">
+		<i data-lucide="pen"></i>
+	</a>
+	{{end}}
+</h1>
+
+{{range .Articles}}
+{{template "article/_card.html" .}}
+{{end}}

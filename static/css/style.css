@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url("~lucide-static/font/Lucide.css");
 /* Bulma Utilities */
 :root {
   --bulma-control-radius: var(--bulma-radius);

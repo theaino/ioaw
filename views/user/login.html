@@ -1,10 +1,24 @@
-<h1>Login</h1>
+<h1 class="title mb-4">Login</h1>
+
 <form method="post" action="/login">
-	<div class="relative z-0 mb-5 group">
-		<label for="username">Username</label>
-		<input type="text" name="username" id="username" class="block" required><br>
+	<div class="field">
+		<label class="label">Username</label>
+		<div class="control">
+			<input class="input" type="text" name="username" id="username" class="block" required><br>
+		</div>
 	</div>
-	Password: <input type="password" name="password" required><br>
-	<button type="submit">Login</button>
+	<div class="field">
+		<label class="label">Password</label>
+		<div class="control">
+			<input class="input" type="password" name="password" required><br>
+		</div>
+	</div>
+
+	<div class="field mt-2">
+		<div class="control">
+			<button class="button is-link" type="submit">Login</button>
+		</div>
+	</div>
 </form>
-<p style="color:red;">{{.Error}}</p>
+
+<p class="has-text-danger">{{.Error}}</p>

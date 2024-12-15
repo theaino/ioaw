@@ -7,12 +7,21 @@
 		{{assets_css "/static/css/style.css"}}
 	</head>
 	<body>
-		{{template "layout/nav.html" .}}
-		<main>
-			{{.LayoutContent}}
-		</main>
-		<footer>
+		<div class="is-flex is-flex-direction-column" style="min-height:100vh">
+			{{template "layout/nav.html" .}}
+			<main class="is-flex-grow-1 columns">
+				<div class="column"></div>
+				<div class="column is-half">
+					{{.LayoutContent}}
+				</div>
+				<div class="column"></div>
+			</main>
 			{{template "layout/footer.html" .}}
-		</footer>
+		</div>
+
+		<script src="https://unpkg.com/lucide@latest"></script>
+		<script>
+		lucide.createIcons();
+		</script>
 	</body>
 </html>
