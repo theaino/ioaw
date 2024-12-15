@@ -4,7 +4,7 @@
 			<div class="card-header-title level">
 				<div class="level-left">
 					<p class="level-item title">{{.Title}}</p>
-					<p class="level-item">{{.Time.Format "02 Jan 2006"}}</p>
+					<p class="level-item">{{config "String" "time_format" "" | .Time.Format}}</p>
 				</div>
 			</div>
 		</header>

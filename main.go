@@ -15,6 +15,8 @@ import (
 	"github.com/beego/i18n"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
+
+	"github.com/Masterminds/sprig/v3"
 )
 
 func loadLocales() {
@@ -50,6 +52,14 @@ func setupDB() {
 	}
 }
 
+func templateFuncs() {
+	web.AddFuncMap("i18n", i18n.Tr)
+
+	for key, value := range sprig.FuncMap() {
+		web.AddFuncMap(key, value)
+	}
+}
+
 func main() {
 	port := os.Getenv("PORT")
 	if port != "" {
@@ -61,7 +71,7 @@ func main() {
 	setupDB()
 	loadLocales()
 
-	web.AddFuncMap("i18n", i18n.Tr)
+	templateFuncs()
 
 	beego.Run()
 }

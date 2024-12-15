@@ -1,6 +1,10 @@
 {{define "section"}}
-  <h{{len .Number}} class="subtitle" id="sec{{.FormattedNumber}}">{{.FormattedNumber}} {{.Title}}</h{{len .Number}}>
-  {{range .Elem}}{{elem $.Template .}}{{end}}
+<section class="contianer m-2 mt-4">
+	<h1 class="title is-{{len .Number | add 2}}" id="sec{{.FormattedNumber}}">{{.FormattedNumber}} {{.Title}}</h1>
+	<div class="container">
+		{{range .Elem}}{{elem $.Template .}}{{end}}
+	</div>
+</section>
 {{end}}
 
 {{define "list"}}

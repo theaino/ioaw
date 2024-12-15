@@ -1,10 +1,10 @@
 {{define "root"}}
 <div class="container">
-	<div class="title">{{.Title}}
+	<div class="title is-1">{{.Title}}
 		{{with .Subtitle}}{{.}}{{end}}
 		{{if .Authors}}
 		{{range .Authors}}
-		<div class="author">
+		<div>
 			{{range .Elem}}{{elem $.Template .}}{{end}}
 		</div>
 		{{end}}

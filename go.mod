@@ -13,7 +13,19 @@ require (
 	golang.org/x/tools v0.28.0
 )
 
-require github.com/Unknwon/goconfig v1.0.0 // indirect
+require (
+	dario.cat/mergo v1.0.1 // indirect
+	github.com/Masterminds/goutils v1.1.1 // indirect
+	github.com/Masterminds/semver/v3 v3.3.1 // indirect
+	github.com/Masterminds/sprig/v3 v3.3.0 // indirect
+	github.com/Unknwon/goconfig v1.0.0 // indirect
+	github.com/google/uuid v1.6.0 // indirect
+	github.com/huandu/xstrings v1.5.0 // indirect
+	github.com/mitchellh/copystructure v1.2.0 // indirect
+	github.com/mitchellh/reflectwalk v1.0.2 // indirect
+	github.com/shopspring/decimal v1.4.0 // indirect
+	github.com/spf13/cast v1.7.0 // indirect
+)
 
 require (
 	github.com/beego/i18n v0.0.0-20161101132742-e9308947f407
@@ -34,7 +46,7 @@ require (
 	github.com/shiena/ansicolor v0.0.0-20200904210342-c7312218db18 // indirect
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d // indirect
 	github.com/yuin/goldmark v1.7.8 // indirect
-	golang.org/x/crypto v0.30.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/net v0.32.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
