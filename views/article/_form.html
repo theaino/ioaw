@@ -1,2 +1,15 @@
-{{.Form | renderform}}
-<button type="submit">Save</button>
+<div class="field">
+	<label class="label">{{i18n .Lang "article.body"}}</label>
+	<div class="control">
+		<textarea class="textarea" name="body" rows="20">{{.Article.Body}}</textarea>
+	</div>
+</div>
+
+<p class="has-text-danger">{{.Error}}</p>
+
+<div class="field mt-2">
+	<div class="control">
+		<button class="button is-link" type="submit">{{i18n .Lang "save"}}</button>
+	</div>
+</div>
+

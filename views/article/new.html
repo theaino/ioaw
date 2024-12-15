@@ -1,8 +1,5 @@
-<h1>Create article</h1>
-{{if .Error}}
-<p style="color: red;">{{.Error}}</p>
-{{end}}
-<form action="/articles/create" method="post">
+<h1 class="title mb-4">{{i18n .Lang "article.new"}}</h1>
+
+<form action="{{urlfor "ArticleController.Create"}}" method="post">
 	{{template "article/_form.html" .}}
 </form>
-<a href="{{urlfor "ArticleController.List"}}">Back to List</a>

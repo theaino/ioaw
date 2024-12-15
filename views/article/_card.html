@@ -1,7 +1,12 @@
 <div class="card my-4">
 	<a href="{{urlfor "ArticleController.View" ":id" .Id}}">
 		<header class="card-header">
-			<p class="card-header-title title">{{.Title}}</p>
+			<div class="card-header-title level">
+				<div class="level-left">
+					<p class="level-item title">{{.Title}}</p>
+					<p class="level-item">{{.Time.Format "02 Jan 2006"}}</p>
+				</div>
+			</div>
 		</header>
 		<div class="card-content">
 			<h2 class="subtitle">{{.Description}}</h2>

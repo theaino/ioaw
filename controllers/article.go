@@ -1,9 +1,12 @@
 package controllers
 
 import (
+	"html/template"
 	"ioaw/models"
 
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/core/logs"
+	"github.com/beego/beego/v2/server/web"
 )
 
 type ArticleController struct {
@@ -23,18 +26,26 @@ func (c *ArticleController) View() {
 	o := orm.NewOrm()
 	article := models.Article{Id: id}
 	err := o.Read(&article)
-	if err == nil {
-		c.Data["Article"] = article
-		c.TplName = "article/view.html"
-	} else {
-		c.Redirect("/articles", 302)
+	if err != nil {
+		c.Redirect(web.URLFor("ArticleController.List"), 302)
+		return
 	}
+	content, err := article.Render()
+	if err != nil {
+		logs.Error(err)
+		c.Redirect(web.URLFor("ArticleController.List"), 302)
+		return
+	}
+	c.Data["Title"] = article.Title
+	c.Data["Article"] = article
+	c.Data["Content"] = template.HTML(content)
+	c.TplName = "article/view.html"
 }
 
 func (c *ArticleController) New() {
 	if c.NeedLogin() { return }
 
-	c.Data["Form"] = &models.Article{}
+	c.Data["Article"] = models.Article{}
 	c.TplName = "article/new.html"
 }
 
@@ -44,16 +55,23 @@ func (c *ArticleController) Create() {
 	var article models.Article
 	if c.ParseForm(&article) != nil {
 		c.Data["Error"] = "Failed to create article."
-		c.TplName = "article/create.html"
+		c.TplName = "article/new.html"
 		return
 	}
+
+	if err := article.Parse(article.Body); err != nil {
+		c.Data["Error"] = c.Tr("article.error_body_invalid")
+		c.TplName = "article/new.html"
+		return
+	}
+
 	o := orm.NewOrm()
 	_, err := o.Insert(&article)
 	if err == nil {
-		c.Redirect("/articles", 302)
+		c.Redirect(web.URLFor("ArticleController.List"), 302)
 	} else {
 		c.Data["Error"] = "Failed to create article."
-		c.TplName = "article/create.html"
+		c.TplName = "article/new.html"
 	}
 }
 
@@ -66,10 +84,9 @@ func (c *ArticleController) Edit() {
 	err := o.Read(&article)
 	if err == nil {
 		c.Data["Article"] = article
-		c.Data["Form"] = &article
 		c.TplName = "article/edit.html"
 	} else {
-		c.Redirect("/articles", 302)
+		c.Redirect(web.URLFor("ArticleController.List"), 302)
 	}
 }
 
@@ -79,11 +96,18 @@ func (c *ArticleController) Update() {
 	id, _ := c.GetInt(":id")
 	o := orm.NewOrm()
 	article := models.Article{Id: id}
-	if o.Read(&article) == nil {
-		c.ParseForm(&article)
-		o.Update(&article)
+	if o.Read(&article) != nil {
+		c.Redirect(web.URLFor("ArticleController.List"), 302)
+		return
 	}
-	c.Redirect("/articles", 302)
+	c.ParseForm(&article)
+	if err := article.Parse(article.Body); err != nil {
+		c.Data["Error"] = c.Tr("article.error_body_invalid")
+		c.TplName = "article/new.html"
+		return
+	}
+	o.Update(&article)
+	c.Redirect(web.URLFor("ArticleController.View", ":id", article.Id), 302)
 }
 
 func (c *ArticleController) Delete() {
@@ -92,5 +116,5 @@ func (c *ArticleController) Delete() {
 	id, _ := c.GetInt(":id")
 	o := orm.NewOrm()
 	o.Delete(&models.Article{Id: id})
-	c.Redirect("/articles", 302)
+	c.Redirect(web.URLFor("ArticleController.List"), 302)
 }

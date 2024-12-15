@@ -1,8 +1,8 @@
 <h1 class="title">
-	Articles
+	{{i18n .Lang "article.all"}}
 	{{if .Authed}}
 	<a class="has-text-inherit" href="{{urlfor "ArticleController.New"}}">
-		<i data-lucide="pen"></i>
+		<i data-lucide="circle-plus"></i>
 	</a>
 	{{end}}
 </h1>

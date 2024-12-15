@@ -1,24 +1,25 @@
-<h1 class="title mb-4">Login</h1>
+<h1 class="title mb-4">{{i18n .Lang "user.login"}}</h1>
 
-<form method="post" action="/login">
+<form method="post" action="{{urlfor "UserController.Login"}}">
 	<div class="field">
-		<label class="label">Username</label>
+		<label class="label">{{i18n .Lang "user.username"}}</label>
 		<div class="control">
 			<input class="input" type="text" name="username" id="username" class="block" required><br>
 		</div>
 	</div>
 	<div class="field">
-		<label class="label">Password</label>
+		<label class="label">{{i18n .Lang "user.password"}}</label>
 		<div class="control">
 			<input class="input" type="password" name="password" required><br>
 		</div>
 	</div>
 
+	<p class="has-text-danger">{{.Error}}</p>
+
 	<div class="field mt-2">
 		<div class="control">
-			<button class="button is-link" type="submit">Login</button>
+			<button class="button is-link" type="submit">{{i18n .Lang "user.login"}}</button>
 		</div>
 	</div>
 </form>
 
-<p class="has-text-danger">{{.Error}}</p>

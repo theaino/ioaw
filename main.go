@@ -1,23 +1,39 @@
 package main
 
 import (
+	"io/fs"
 	_ "ioaw/routers"
 	"os"
+	"path/filepath"
 	"strconv"
+	"strings"
 
 	"github.com/beego/beego/v2/client/orm"
+	"github.com/beego/beego/v2/core/logs"
 	"github.com/beego/beego/v2/server/web"
 	beego "github.com/beego/beego/v2/server/web"
+	"github.com/beego/i18n"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
-	port := os.Getenv("PORT")
-	if port != "" {
-		beego.BConfig.Listen.HTTPPort, _ = strconv.Atoi(port)
-	}
+func loadLocales() {
+	filepath.Walk("conf/locale", func(path string, info fs.FileInfo, err error) error {
+		if err != nil { return err }
 
+		if !info.IsDir() && strings.HasSuffix(info.Name(), ".ini") {
+			locale := strings.TrimSuffix(info.Name(), ".ini")
+			err := i18n.SetMessage(locale, path)
+			if err != nil {
+				logs.Error("Failed to load locale", locale, err)
+			}
+		}
+
+		return nil
+	})
+}
+
+func setupDB() {
 	dbUrl := os.Getenv("DATABASE_URL")
 	if dbUrl == "" {
 		orm.RegisterDriver("sqlite3", orm.DRSqlite)
@@ -27,8 +43,20 @@ func main() {
 	}
 
 	orm.RunSyncdb("default", false, true)
+}
 
-	web.SetStaticPath("/static", "dist")
+func main() {
+	port := os.Getenv("PORT")
+	if port != "" {
+		beego.BConfig.Listen.HTTPPort, _ = strconv.Atoi(port)
+	}
+
+	web.SetStaticPath("/dist", "dist")
+
+	setupDB()
+	loadLocales()
+
+	web.AddFuncMap("i18n", i18n.Tr)
 
 	beego.Run()
 }

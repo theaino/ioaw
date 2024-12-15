@@ -1,0 +1,24 @@
+{{define "root"}}
+<div class="container">
+	<div class="title">{{.Title}}
+		{{with .Subtitle}}{{.}}{{end}}
+		{{if .Authors}}
+		{{range .Authors}}
+		<div class="author">
+			{{range .Elem}}{{elem $.Template .}}{{end}}
+		</div>
+		{{end}}
+		{{end}}
+	</div>
+</div>
+<div class="container">
+	{{range .Sections}}
+	{{elem $.Template .}}
+	{{end}}{{/* of Section block */}}
+</div>
+{{end}}
+
+{{define "newline"}}
+{{/* No automatic line break. Paragraphs are free-form. */}}
+{{end}}
+

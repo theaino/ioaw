@@ -1,6 +1,18 @@
-<a href="{{urlfor "ArticleController.List"}}">Back to List</a>
-<h1>{{.Article.Title}}</h1>
-<h3>{{.Article.Description}}</h3>
+{{if .Authed}}
+<div class="level">
+	<div class="level-left">
+		<a class="level-item has-text-inherit" href="{{urlfor "ArticleController.Edit" ":id" .Article.Id}}">
+			Edit
+		</a>
+		<a class="level-item has-text-inherit" href="{{urlfor "ArticleController.Delete" ":id" .Article.Id}}">
+			Delete
+		</a>
+	</div>
+</div>
+<hr>
+{{end}}
+
+
 <div>
-	{{.Article.Body}}
+	{{.Content}}
 </div>
