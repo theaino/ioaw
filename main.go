@@ -42,7 +42,10 @@ func setupDB() {
 		orm.RegisterDataBase("default", "postgres", dbUrl)
 	}
 
-	orm.RunSyncdb("default", false, true)
+	err := orm.RunSyncdb("default", false, true)
+	if err != nil {
+		logs.Error("Failed to syncdb", err)
+	}
 }
 
 func main() {

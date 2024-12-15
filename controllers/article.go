@@ -53,7 +53,8 @@ func (c *ArticleController) Create() {
 	if c.NeedLogin() { return }
 
 	var article models.Article
-	if c.ParseForm(&article) != nil {
+	if err := c.ParseForm(&article); err != nil {
+		logs.Error("Failed to create article", err)
 		c.Data["Error"] = "Failed to create article."
 		c.TplName = "article/new.html"
 		return
@@ -70,6 +71,7 @@ func (c *ArticleController) Create() {
 	if err == nil {
 		c.Redirect(web.URLFor("ArticleController.List"), 302)
 	} else {
+		logs.Error("Failed to create article", err)
 		c.Data["Error"] = "Failed to create article."
 		c.TplName = "article/new.html"
 	}
