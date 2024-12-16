@@ -11,13 +11,11 @@
 	<body>
 		<div class="is-flex is-flex-direction-column" style="min-height:100vh">
 			{{template "layout/nav.html" .}}
-			<main class="is-flex-grow-1 columns">
-				<div class="column"></div>
-				<div class="column is-half">
+			<div class="is-flex-grow-1 columns is-mobile is-centered is-gapless">
+				<div class="column is-half-desktop is-two-thirds-tablet is-four-fifths-mobile">
 					{{.LayoutContent}}
 				</div>
-				<div class="column"></div>
-			</main>
+			</div>
 			{{template "layout/footer.html" .}}
 		</div>
 	</body>
