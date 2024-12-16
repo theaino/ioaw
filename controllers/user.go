@@ -12,11 +12,31 @@ type UserController struct {
 	AuthController
 }
 
+func (c *UserController) CheckUserExist() bool {
+	o := orm.NewOrm()
+	userCount, err := o.QueryTable(new(models.User)).Count()
+	if userCount != 0 || err != nil {
+		c.Redirect("/login", 302)
+		return true
+	}
+	return false
+}
+
 func (c *UserController) RegisterForm() {
+	if c.CheckUserExist() { return }
+
+	o := orm.NewOrm()
+	userCount, err := o.QueryTable(new(models.User)).Count()
+	if userCount != 0 || err != nil {
+		c.Redirect("/login", 302)
+		return
+	}
 	c.TplName = "user/register.html"
 }
 
 func (c *UserController) Register() {
+	if c.CheckUserExist() { return }
+	
 	username := c.GetString("username")
 	password := c.GetString("password")
 
